@@ -22,8 +22,21 @@
             animation: myfirstani 2s infinite;
         }
     </style>
+    <script>
+        function audioAutoPlay(id){
+            var audio = document.getElementById(id);
+            audio.play();
+            document.addEventListener("WeixinJSBridgeReady", function () {
+                audio.play();
+            }, false);
+            document.addEventListener('YixinJSBridgeReady', function() {
+                audio.play();
+            }, false);
+        }
+    </script>
 </head>
 <body style="text-align:center;">
+<font size="5"> 5号字体效果</font><br/>  
 <audio src="music/毛不易 - 消愁 (Live).mp3" controls="controls" autoplay="autoplay">
 </audio>
 <h1>愁</h1>
