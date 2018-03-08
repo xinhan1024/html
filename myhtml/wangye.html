@@ -21,18 +21,32 @@
             animation: myfirstani 2s infinite;
         }
     </style>
-    <script>
-        function audioAutoPlay(id){
-            var audio = document.getElementById(id);
-            audio.play();
-            document.addEventListener("WeixinJSBridgeReady", function () {
-                audio.play();
-            }, false);
-            document.addEventListener('YixinJSBridgeReady', function() {
-                audio.play();
-            }, false);
+<script>
+    setTimeout(function(){
+        $(window).scrollTop(1);
+    },0);
+
+    /*音乐*/
+    var audio = $('#car_audio');
+    var isPlaying = false;
+    function playAudio() {
+        var audio = $('#car_audio');
+        if (audio.attr('src') == undefined) {
+            audio.attr('src', audio.data('src'));
         }
-    </script>
+        audio[0].play();
+        isPlaying = true;
+    }
+    $(function(){
+        playAudio();
+        document.addEventListener("WeixinJSBridgeReady", function () {
+            WeixinJSBridge.invoke('getNetworkType', {}, function (e) {
+                network = e.err_msg.split(":")[1];  //结果在这里
+                playAudio();
+            });
+        }, false);
+    })
+</script>
 </head>
 <body >
 <div class="text clearfix" style="text-align:center;">
@@ -65,9 +79,10 @@
 <p>却道天凉好个秋。</p>
 
 </font><br/>  
-</span>  
-<audio src="music/毛不易 - 消愁 (Live).mp3" controls="controls" autoplay="autoplay">
-</audio>    
+</span>
+<audio preload="preload" id="car_audio" src="music/毛不易 - 消愁 (Live).mp3" loop=""></audio>
+<!-- <audio src="music/毛不易 - 消愁 (Live).mp3" controls="controls" autoplay="autoplay">
+</audio>     -->
 <h1>沙漠</h1>
 <font size="5">
 <p>     ---周将</p>
